@@ -14,8 +14,6 @@ jobs:
       pull-requests: write
 
     steps:
-    - name: Comment PR
-      uses: ./.github/workflows/comment.yml
     - name: Show variables
       run: |
         echo "github.event_name: ${{ github.event_name }}"
@@ -24,6 +22,8 @@ jobs:
         echo "github.event.pull_request.base.ref: ${{ github.event.pull_request.base.ref }}"
         echo "github: ${{ toJson(github) }}"
     - uses: actions/checkout@v2
+    - name: Comment PR
+      uses: ./.github/workflows/comment.yml
     - name: Show SHA
       run: |
         SHA="${{ github.event.pull_request.head.sha || github.sha }}"
