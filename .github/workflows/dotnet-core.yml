@@ -10,8 +10,17 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
 
     steps:
+    - name: Comment PR
+      uses: mshick/add-pr-comment@v2
+      with:
+        allow-repeats: true
+        message: |
+          github.ref: ${{ github.ref }}
+          github.head_ref: ${{ github.head_ref }}
     - name: Show variables
       run: |
         echo "github.event_name: ${{ github.event_name }}"
