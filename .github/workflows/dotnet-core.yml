@@ -19,7 +19,7 @@ jobs:
       with:
         allow-repeats: true
         message: |
-          github.ref: ${{ github.ref }}
+          github.ref_name: ${{ github.ref_name }}
           github.head_ref: ${{ github.head_ref }}
     - name: Show variables
       run: |
