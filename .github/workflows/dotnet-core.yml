@@ -8,9 +8,6 @@ on:
 
 jobs:
   comment:
-    runs-on: ubuntu-latest
-    permissions:
-      pull-requests: write
     uses: ./.github/workflows/comment.yml
 
   build:
