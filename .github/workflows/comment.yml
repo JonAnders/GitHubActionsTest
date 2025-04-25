@@ -7,14 +7,15 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - name: Show variables
-        run: |
-          echo "github.event_name: ${{ github.event_name }}"
-          echo "github.event.action: ${{ github.event.action }}"
-      - name: Comment PR
-        uses: mshick/add-pr-comment@v2
-        with:
-          allow-repeats: true
-          message: |
-            github.ref_name: ${{ github.ref_name }}
-            github.head_ref: ${{ github.head_ref }}
+    - uses: actions/checkout@v2
+    - name: Show variables
+      run: |
+        echo "github.event_name: ${{ github.event_name }}"
+        echo "github.event.action: ${{ github.event.action }}"
+    - name: Comment PR
+      uses: mshick/add-pr-comment@v2
+      with:
+        allow-repeats: true
+        message: |
+          github.ref_name: ${{ github.ref_name }}
+          github.head_ref: ${{ github.head_ref }}
