@@ -44,12 +44,12 @@ jobs:
       run: |
         echo "GITHUB_REF: $GITHUB_REF"
         echo "RAI_RAI: $RAI_RAI"
-    - uses: gittools/actions/gitversion/setup@v3.2.1
+    - uses: gittools/actions/gitversion/setup@v1.1.0
       with:
         versionSpec: '5.x'
-    - uses: gittools/actions/gitversion/command@v3.2.1
+    - uses: gittools/actions/gitversion/execute@v1.1.0
       with:
-        arguments: "-b ${{ github.event.pull_request.head.ref || github.ref }}"
+        additionalArguments: "-b ${{ github.event.pull_request.head.ref || github.ref }}"
     - name: Show SemVer
       run: |
         echo "env.GitVersion_SemVer: ${{ env.GitVersion_SemVer }}"
