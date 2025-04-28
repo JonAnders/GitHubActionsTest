@@ -42,6 +42,15 @@ jobs:
         echo "GITHUB_REF: $GITHUB_REF"
         echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
         echo "GITHUB_REF_TYPE: $GITHUB_REF_TYPE"
+    - name: Show env vars related to GitVersion (with step override)
+      env:
+        GITHUB_REF: ${{ github.event.pull_request.head.ref || github.ref }}
+        GITHUB_REF_NAME: ${{ github.event.pull_request.head.ref || github.ref }}
+        GITHUB_REF_TYPE: ${{ github.event.pull_request.head.ref || github.ref }}
+      run: |
+        echo "GITHUB_REF: $GITHUB_REF"
+        echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+        echo "GITHUB_REF_TYPE: $GITHUB_REF_TYPE"
     - name: Show SHA
       run: |
         SHA="${{ github.event.pull_request.head.sha || github.sha }}"
