@@ -47,9 +47,9 @@ jobs:
     - uses: gittools/actions/gitversion/setup@v1.1.0
       with:
         versionSpec: '5.x'
-    - uses: gittools/actions/gitversion/command@v1.1.0
+    - uses: gittools/actions/gitversion/execute@v1.1.0
       with:
-        arguments: "-b ${{ github.event.pull_request.head.ref || github.ref }}"
+        additionalArguments: "-b ${{ github.event.pull_request.head.ref || github.ref }}"
     - name: Show SHA
       run: |
         SHA="${{ github.event.pull_request.head.sha || github.sha }}"
