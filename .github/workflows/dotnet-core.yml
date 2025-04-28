@@ -25,7 +25,23 @@ jobs:
         echo "GITHUB_REF: $GITHUB_REF"
         echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
         echo "GITHUB_REF_TYPE: $GITHUB_REF_TYPE"
+    - name: Override GITHUB_REF in PRs
+      run: |
+        # When the workflow is triggered by a pull request event, the ref is on the format refs/pull/123/merge.
+        # This causes GitVersion to create a version based on the merge branch instead of the PR head branch, on the format 3.2.1-PullRequest0123.1.
+        echo "GITHUB_REF=${{ github.event.pull_request.head.ref || github.ref }}"
+        echo "GITHUB_REF=${{ github.event.pull_request.head.ref || github.ref }}" >> $GITHUB_ENV
+    - name: Show env vars related to GitVersion (After override)
+      run: |
+        echo "GITHUB_REF: $GITHUB_REF"
+        echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+        echo "GITHUB_REF_TYPE: $GITHUB_REF_TYPE"
     - uses: actions/checkout@v2
+    - name: Show env vars related to GitVersion (After checkout)
+      run: |
+        echo "GITHUB_REF: $GITHUB_REF"
+        echo "GITHUB_REF_NAME: $GITHUB_REF_NAME"
+        echo "GITHUB_REF_TYPE: $GITHUB_REF_TYPE"
     - name: Show SHA
       run: |
         SHA="${{ github.event.pull_request.head.sha || github.sha }}"
